@@ -103,10 +103,8 @@ class App extends React.Component {
 
         <div className='books'>
           {Object.keys(this.state.books).map(genre => {
-            // console.log(this.state.books[genre]);
             let width = this.state.books[genre];
             $('#bluebar').css({'background-color':'#6389cb', 'width':`${width}%`, 'height': '100%'});
-            $('.bar-graph').css('background-color', 'red');
             return (
               <div className='genre-row'
                   key={genre}>
