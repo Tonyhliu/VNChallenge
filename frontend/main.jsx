@@ -89,7 +89,7 @@ class App extends React.Component {
 
     return(
       <div className='main-container'>
-        <div className='header'>
+        <header className='header'>
           <h3 className='title'>Book Genres</h3>
           <ul className='header-ul'>
             <li>Sort By:</li>
@@ -101,7 +101,7 @@ class App extends React.Component {
                 id='book'
                 onClick={this._sortByNum.bind(this)}>Books</li>
           </ul>
-        </div>
+        </header>
 
         <div className='books'>
           {Object.keys(this.state.books).map(genre => {
