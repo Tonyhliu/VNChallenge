@@ -9,7 +9,8 @@ class App extends React.Component {
 
     this.state = {
       books: [],
-      sortBy: null
+      sortBy: null,
+      ready: false
     };
 
     this._bookChange = this._bookChange.bind(this);
@@ -85,6 +86,7 @@ class App extends React.Component {
       $('#book').addClass('selected');
     }
 
+
     return(
       <div className='main-container'>
         <div className='header'>
@@ -103,14 +105,18 @@ class App extends React.Component {
 
         <div className='books'>
           {Object.keys(this.state.books).map(genre => {
-            let width = this.state.books[genre];
-            $('#bluebar').css({'background-color':'#6389cb', 'width':`${width}%`, 'height': '100%'});
+            let percentage = this.state.books[genre];
+            const bbStyle = {
+              width: `${percentage}%`,
+              height: '100%',
+              backgroundColor: '#6389cb'
+            };
             return (
               <div className='genre-row'
                   key={genre}>
                 <div className='genre'>{genre}</div>
                 <div className='bar-graph'>
-                  <div id='bluebar'></div>
+                  <div id='bluebar' style={bbStyle} />
                 </div>
                 <div className='number'>{this.state.books[genre]}</div>
               </div>
@@ -123,6 +129,7 @@ class App extends React.Component {
 }
 
 export default App;
+
 
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(<App/>, document.getElementById('root-element'));
