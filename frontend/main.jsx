@@ -118,7 +118,7 @@ class App extends React.Component {
         <div className='books'>
           {Object.keys(this.state.books).map(genre => {
             let percentage = this.state.max === 0 ? 0 : Math.round((this.state.books[genre] / this.state.max) * 100);
-            console.log(percentage);
+            // console.log(percentage);
             const bbStyle = {
               width: `${percentage}%`,
               height: '100%',
