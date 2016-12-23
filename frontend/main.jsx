@@ -8,12 +8,13 @@ class App extends React.Component {
     super();
 
     this.state = {
-      books: [],
+      books: {},
       sortBy: null,
-      ready: false
+      max: 0
     };
 
     this._bookChange = this._bookChange.bind(this);
+    this._setHighest = this._setHighest.bind(this);
   }
 
   componentWillMount() {
@@ -27,6 +28,18 @@ class App extends React.Component {
 
   _bookChange() {
     this.setState({ books: BookStore.all() });
+    this._setHighest();
+  }
+
+  _setHighest() {
+    let highest = 0;
+    Object.keys(this.state.books).forEach(genre => {
+      if (this.state.books[genre] > highest) {
+        highest = this.state.books[genre];
+      }
+    });
+
+    this.setState({ max: highest });
   }
 
   _sortByName() {
@@ -86,7 +99,6 @@ class App extends React.Component {
       $('#book').addClass('selected');
     }
 
-
     return(
       <div className='main-container'>
         <header className='header'>
@@ -105,7 +117,8 @@ class App extends React.Component {
 
         <div className='books'>
           {Object.keys(this.state.books).map(genre => {
-            let percentage = this.state.books[genre];
+            let percentage = this.state.max === 0 ? 0 : Math.round((this.state.books[genre] / this.state.max) * 100);
+            console.log(percentage);
             const bbStyle = {
               width: `${percentage}%`,
               height: '100%',
